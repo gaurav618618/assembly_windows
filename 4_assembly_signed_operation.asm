@@ -21,6 +21,12 @@ start:
 	  movsx  ebx,al              ;moves number with sign extension
 	  mov    eax,ebx
 	  call   print_eax
+	  xor    eax,eax
+	  mov    eax,2
+	  xor    ebx,ebx
+	  mov    ebx,-8
+	  imul   ebx             ;signed multiplication
+	  call   print_eax
 	  
 	  push   0
 	  call   [ExitProcess]
