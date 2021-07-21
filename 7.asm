@@ -14,27 +14,18 @@ section '.data' data readable writable
 
 ;BSS Section which resides unitialised data	
 ;----------------------------------------------
-section '.bss' readable writeable ; ("Better Save Space") does not take space on disk but takes space in memory
+section '.bss' readable writeable ; ("Better Save Space")
 	;uninitialized data:
 	num1	dd	?
 	arr8	dd	8 dup (?)
 
 ;----------------------------------------------
 section '.text' code readable executable
-	    mov		eax,100h
-		mov		ecx,5
-		mov		edx,2
 
 start:
-		add 	eax,5
-		movzx   ebx,dl
-		sub		eax,ebx
-		rol		edx,2
-		inc 	eax
-		dec		ecx
-		jnz		start
-        call 	print_eax
-		
+      
+		mov	eax,arr8
+		call 	print_eax
 		
 		;exit process
 		push   0

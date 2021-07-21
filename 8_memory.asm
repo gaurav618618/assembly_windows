@@ -12,29 +12,14 @@ section '.data' data readable writable
 	; 5 dwords initialized as 0
 	arr6	dd 6 dup (12345678h) 
 
-;BSS Section which resides unitialised data	
-;----------------------------------------------
-section '.bss' readable writeable ; ("Better Save Space") does not take space on disk but takes space in memory
-	;uninitialized data:
-	num1	dd	?
-	arr8	dd	8 dup (?)
-
 ;----------------------------------------------
 section '.text' code readable executable
-	    mov		eax,100h
-		mov		ecx,5
-		mov		edx,2
-
 start:
-		add 	eax,5
-		movzx   ebx,dl
-		sub		eax,ebx
-		rol		edx,2
-		inc 	eax
-		dec		ecx
-		jnz		start
+		mov     eax,arr6      ;arr6 is just a lable address to which arr6 label points will be moved  "arr6->204001" 
         call 	print_eax
-		
+		xor		eax,eax
+		mov 	eax, [arr6]    ; content of the address to which arr6 label points will be moved     "arr6->204001->12345678h"
+		call  	print_eax
 		
 		;exit process
 		push   0

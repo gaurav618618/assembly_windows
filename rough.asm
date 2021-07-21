@@ -10,22 +10,18 @@ include 'win32a.inc'
 
 section '.data' data readable writable
 	; 5 dwords initialized as 0
-	arr6	dd 6 dup (12345678h) 
-
-;BSS Section which resides unitialised data	
-;----------------------------------------------
-section '.bss' readable writeable ; ("Better Save Space")
-	;uninitialized data:
-	num1	dd	?
-	arr8	dd	8 dup (?)
+	arr6	dd 3 dup (12345678h) 
 
 ;----------------------------------------------
 section '.text' code readable executable
-
 start:
-      
-		mov		eax,arr8
+		mov		eax, 66666667h
+		mov 	ecx, 23456
+		imul  	ecx
+		call  	print_eax
+		mov		eax,edx
 		call 	print_eax
+		
 		
 		;exit process
 		push   0
