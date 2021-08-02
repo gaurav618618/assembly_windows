@@ -9,24 +9,24 @@ include 'win32a.inc'
 ;----------------------------------------------
 
 section '.data' data readable writable
-	; 5 dwords initialized as 0
-	arr6	dd 3 dup (12345678h) 
+		str1  	db 	'hello world',0
 
 ;----------------------------------------------
 section '.text' code readable executable
 start:
-
-		push  	[arr6]            
-		call    $+5                
-		pop     ebp                
-		pop 	edx                
-		mov 	eax,edx
+		mov 	eax,edi
+		call 	print_eax
+		mov     al,1fh
+		cld
+		stosb
+		mov 	eax,edi
+		call 	print_eax
+	
+		mov 	eax,edi
 		call 	print_eax
 		
 		
 		
-		;exit process
-exit:
 		push   0
 		call   [ExitProcess]
 

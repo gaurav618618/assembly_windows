@@ -4,29 +4,30 @@ entry start
 
 include 'win32a.inc'
 
+struct PNT
+	x dd ?
+	y dd ?
+ends
+
 
 ; Data section:
 ;----------------------------------------------
 
 section '.data' data readable writable
-	; 5 dwords initialized as 0
-	arr6	dd 3 dup (12345678h) 
+		my_pnt	PNT		3,4
 
 ;----------------------------------------------
 section '.text' code readable executable
 start:
-
-		push  	[arr6]            
-		call    $+5                
-		pop     ebp                
-		pop 	edx                
-		mov 	eax,edx
+		mov     eax,[my_pnt.y]
 		call 	print_eax
 		
+		mov     eax,[my_pnt + PNT.y] ;PNT.y is offsset of y which is 4
+		call 	print_eax
 		
+		mov     eax,[my_pnt+4]
+		call 	print_eax
 		
-		;exit process
-exit:
 		push   0
 		call   [ExitProcess]
 
